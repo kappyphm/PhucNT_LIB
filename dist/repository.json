@@ -3,9 +3,9 @@
   "name": "PhucNT KiCad Library Repository",
   "packages": {
     "url": "https://raw.githubusercontent.com/kappyphm/PhucNT_LIB/main/dist/packages.json",
-    "sha256": "576e4f139d68b70f54cb4ed538513f2948acce6aedbe62df3ff44884c9d5e7e4",
-    "update_timestamp": 1793627953,
-    "update_time_utc": "2026-11-02 13:59:13"
+    "sha256": "b326bd8877e27581bce91f75c5f779e5bfde076e41d4a1f9f135650e261f4b40",
+    "update_timestamp": 1793628818,
+    "update_time_utc": "2026-11-02 14:13:38"
   },
   "maintainer": {
     "name": "kappyphm",
