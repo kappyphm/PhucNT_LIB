@@ -1,0 +1,47 @@
+{
+  "$schema": "https://go.kicad.org/pcm/schemas/v1",
+  "packages": [
+    {
+      "name": "PhucNT KiCad Library",
+      "description": "Symbols, footprints and 3D models for PhucNT projects",
+      "description_full": "PhucNT KiCad Library contains breakout board symbols, footprints and 3D models for BMP388, ICM20602 and the WeAct STM32F405RGT6 64-pin core board.\n\nThird-party 3D models are provided for convenience. Models derived from the official KiCad libraries are distributed under CC-BY-SA-4.0 with attribution to the KiCad Libraries Team.",
+      "identifier": "com.github.kappyphm.phucnt-lib",
+      "type": "library",
+      "author": {
+        "name": "kappyphm",
+        "contact": {
+          "web": "https://github.com/kappyphm"
+        }
+      },
+      "maintainer": {
+        "name": "kappyphm",
+        "contact": {
+          "web": "https://github.com/kappyphm"
+        }
+      },
+      "license": "CC-BY-SA-4.0",
+      "resources": {
+        "homepage": "https://github.com/kappyphm",
+        "github": "https://github.com/kappyphm/PhucNT_LIB",
+        "documentation": "https://github.com/kappyphm/PhucNT_LIB#readme",
+        "support": "https://github.com/kappyphm/PhucNT_LIB/issues"
+      },
+      "tags": [
+        "symbols",
+        "footprints",
+        "models3d"
+      ],
+      "versions": [
+        {
+          "version": "1.0.0",
+          "status": "stable",
+          "kicad_version": "9.0",
+          "download_url": "https://github.com/kappyphm/PhucNT_LIB/releases/download/v1.0.0/com.github.kappyphm.phucnt-lib_v1.0.0_pcm.zip",
+          "download_sha256": "196ff2f08693d29a68648390ef0a35597d0feea1c8642e7d1e64f79a45ee2c51",
+          "download_size": 5912293,
+          "install_size": 29299076
+        }
+      ]
+    }
+  ]
+}

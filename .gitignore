@@ -1,0 +1,22 @@
+# KiCad local/user files
+*.kicad_prl
+fp-info-cache
+*.bak
+*.lck
+*-backups/
+~*
+sym-lib-table
+fp-lib-table
+
+# Build outputs
+dist/*.zip
+dist/stage/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS files
+Thumbs.db
+.DS_Store
+desktop.ini

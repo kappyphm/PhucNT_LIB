@@ -1,0 +1,16 @@
+{
+  "$schema": "https://go.kicad.org/pcm/schemas/v1",
+  "name": "PhucNT KiCad Library Repository",
+  "packages": {
+    "url": "https://raw.githubusercontent.com/kappyphm/PhucNT_LIB/main/dist/packages.json",
+    "sha256": "576e4f139d68b70f54cb4ed538513f2948acce6aedbe62df3ff44884c9d5e7e4",
+    "update_timestamp": 1793627953,
+    "update_time_utc": "2026-11-02 13:59:13"
+  },
+  "maintainer": {
+    "name": "kappyphm",
+    "contact": {
+      "web": "https://github.com/kappyphm"
+    }
+  }
+}

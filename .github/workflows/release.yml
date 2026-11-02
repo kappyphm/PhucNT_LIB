@@ -1,0 +1,80 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pcm-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check out tagged commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify tag is on main
+        run: |
+          git fetch origin main
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
+            echo "Tag commit is not on main" >&2
+            exit 1
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate tag and library
+        run: python scripts/build_pcm.py --check-only --tag "$GITHUB_REF_NAME"
+
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Build package and indexes
+        run: |
+          python scripts/build_pcm.py \
+            --repo "$GITHUB_REPOSITORY" \
+            --branch main \
+            --tag "$GITHUB_REF_NAME"
+
+      - name: Publish release asset
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" dist/*.zip --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" dist/*.zip \
+              --title "$GITHUB_REF_NAME" \
+              --notes "PhucNT KiCad Library $GITHUB_REF_NAME"
+          fi
+
+      - name: Save generated indexes
+        run: |
+          mkdir -p "$RUNNER_TEMP/pcm-index"
+          cp dist/packages.json dist/repository.json "$RUNNER_TEMP/pcm-index/"
+
+      - name: Commit indexes to main
+        run: |
+          git checkout -f -B main origin/main
+          cp "$RUNNER_TEMP/pcm-index/packages.json" dist/packages.json
+          cp "$RUNNER_TEMP/pcm-index/repository.json" dist/repository.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/packages.json dist/repository.json
+          if git diff --cached --quiet; then
+            echo "No index changes"
+          else
+            git commit -m "chore: update PCM index for $GITHUB_REF_NAME"
+            git push origin main
+          fi
